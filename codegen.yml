@@ -1,0 +1,34 @@
+overwrite: true
+schema: ./src/modules/**/typeDefs/*.graphql
+require:
+  - ts-node/register/transpile-only
+documents: null
+generates:
+  #./src/types/graphql.ts:
+  ./src/modules/:
+    preset: graphql-modules
+    presetConfig:
+      baseTypesPath: ../types/graphql.ts
+      filename: types/module-types.ts
+      enumsAsTypes: false
+    plugins:
+      - add:
+          content: '/* eslint-disable */'
+      - typescript
+      - typescript-resolvers
+    config:
+      enumsAsTypes: false
+      namingConvention:
+        enumValues: upper-case#upperCase
+      enumValues:
+        Sex:
+          MALE: 0
+          FEMALE: 1
+        Status:
+          PENDING: 0
+          ACCEPTED: 1
+          DECLINED: 2
+          BLOCKED: 3
+  ./graphql.schema.json:
+    plugins:
+      - introspection

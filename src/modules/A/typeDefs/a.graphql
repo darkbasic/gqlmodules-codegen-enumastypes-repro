@@ -1,0 +1,8 @@
+enum Sex {
+  MALE
+  FEMALE
+}
+
+type Query {
+  dummy: String
+}
